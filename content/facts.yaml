@@ -1,0 +1,408 @@
+# Every reported number, label, and citation shown on screen lives here.
+# Each fact has a value (checked by tests/test_facts.py), a unit where one applies,
+# the on-screen text, and a source. On-screen strings in the "beats" section pull
+# numbers in with {key} or {key.part}, so each number is typed exactly once.
+
+facts:
+  saycan_instructions:
+    value: 101
+    unit: instructions
+    text: "101"
+    source: "Ahn et al. 2022, abstract"
+  saycan_results:
+    value:
+      palm_saycan: {plan: 84, execute: 74}
+      flan_saycan: {plan: 70, execute: 61}
+      palm_alone: {plan: 67}
+      flan_alone: {plan: 38}
+      behavioral_cloning: {plan: 0, execute: 0}
+    unit: "%"
+    texts: {palm_plan: "84%", palm_exec: "74%"}
+    source: "Ahn et al. 2022, results table (also on the authors' Google Research blog)"
+  rt2_unseen_avg:
+    value: {rt2_palix_55b: 62, rt1: 32}
+    unit: "%"
+    texts: {rt2: "62%", rt1: "32%"}
+    source: "Brohan et al. 2023, Fig. 4"
+  rt2_trials:
+    value: 6000
+    unit: trials
+    text: "6,000"
+    source: "Brohan et al. 2023, abstract"
+  rt2_rate:
+    value: {model_55b_hz: [1, 3], model_5b_hz: 5}
+    unit: Hz
+    texts: {short_55b: "1 to 3 Hz", short_5b: "about 5 Hz"}
+    note: "55B on a multi-TPU cloud service"
+    source: "Brohan et al. 2023, real-time inference paragraph"
+  l2r_tasks:
+    value: 17
+    unit: tasks
+    text: "17"
+    source: "Yu et al. 2023, abstract"
+  l2r_success:
+    value: {l2r: 90, code_as_policies_baseline: 50}
+    unit: "%"
+    texts: {l2r: "90%", cap: "50%"}
+    source: "Yu et al. 2023, abstract"
+  clip_pairs:
+    value: 400000000
+    unit: image-text pairs
+    text: "400 million"
+    source: "Radford et al. 2021, abstract"
+  clip_zero_shot:
+    value: "matches original ResNet-50 on ImageNet, zero-shot"
+    text: "matched ResNet-50 on ImageNet"
+    source: "Radford et al. 2021, abstract"
+  homerobot_real:
+    value: 20
+    unit: "%"
+    text: "20%"
+    source: "Yenamandra et al. 2023, abstract"
+  gorilla_base:
+    value: {model: "LLaMA-7B", training: "retriever-aware", apibench: [HuggingFace, TorchHub, TensorHub]}
+    texts: {model: "LLaMA-7B"}
+    source: "Patil et al. 2023, abstract and method"
+  vllm_throughput:
+    value: [2, 4]
+    unit: "times throughput, same latency, vs FasterTransformer and Orca"
+    text: "2 to 4 times"
+    source: "Kwon et al. 2023, abstract"
+  vllm_structured:
+    value: [guided_json, guided_regex, guided_choice, guided_grammar]
+    text: "guided_json, guided_regex, guided_choice, guided_grammar"
+    source: "vLLM documentation, Structured Outputs"
+  rma_rates:
+    value: {base_policy_hz: 100, adaptation_hz: 10}
+    unit: Hz
+    texts: {base: "100 Hz", adapt: "10 Hz"}
+    source: "Kumar et al. 2021, overview figure caption"
+  rudin_train_time:
+    value: {flat_minutes_under: 4, rough_minutes: 20, gpus: 1}
+    unit: minutes
+    texts: {flat: "under 4 min", rough: "20 min"}
+    source: "Rudin et al. 2021, abstract"
+  cladera_specs:
+    value: 7
+    unit: language specifications
+    text: "7"
+    source: "Cladera et al. 2025, abstract"
+  cladera_max_distance:
+    value: 1200
+    unit: m
+    text: "about 1.2 km"
+    source: "Cladera et al. 2025, Table 5 (mission S1)"
+  cladera_triage:
+    value: {ground_alone: 0.0, air_ground: 83.3, air_ground_runs: [5, 6], ground_true_map: 100.0}
+    unit: "%"
+    texts: {ground_alone: "0%", air_ground: "83.3%", runs: "5 of 6", true_map: "100%"}
+    source: "Cladera et al. 2025, Table 6"
+  cladera_llm:
+    value: "GPT-4o through an API, not onboard"
+    text: "GPT-4o API, not onboard"
+    source: "Cladera et al. 2025"
+  tello_ports:
+    value: {command: 8889, state: 8890, video: 11111}
+    unit: UDP port
+    texts: {cmd: "8889", state: "8890", video: "11111"}
+    source: "Tello SDK User Guide"
+  tello_go_limits:
+    value: {xyz_min: -500, xyz_max: 500, speed_min: 10, speed_max: 100, not_all_within: 20}
+    unit: cm, cm/s
+    texts: {xyz: "-500 to 500 cm", speed: "10 to 100 cm/s", deadzone: "-20 to 20 cm"}
+    source: "Tello SDK 2.0 User Guide"
+  tello_flight_time:
+    value: 13
+    unit: min
+    text: "13 min"
+    source: "Tello User Manual"
+  go2_real_runs:
+    value: {success: 14, runs: 19, rate: 0.737, std: 0.101}
+    texts: {short: "14 of 19", rate: "0.737 ± 0.101"}
+    source: "My Exam 2 repo, README Sec. 5.2"
+  go2_nav_rate:
+    value: 10
+    unit: Hz
+    text: "10 Hz"
+    source: "My Exam 2 repo, README Sec. 1"
+  go2_walk:
+    value: {inputs: 45, outputs: 12, policy_hz: 50, pd_hz: 200, simulation_only: true}
+    texts: {policy: "50 Hz", pd: "200 Hz", io: "45 inputs → 12 joint targets"}
+    source: "My Exam 2 repo, README Sec. 5.1"
+  owlv2_rate:
+    value: 1
+    unit: Hz
+    qualifier: about
+    text: "about 1 Hz"
+    source: "My Exam 2 repo, README Sec. 3.1"
+  overhead_camera_height:
+    value: 6.76
+    unit: m
+    text: "6.76 m"
+    source: "My Exam 2 repo, README Sec. 1"
+  grounding_eval:
+    value:
+      - {prompt: "all prompts", success: 0.614, n: 132}
+      - {prompt: "go to the {color} chair", success: 0.851, n: 67}
+      - {prompt: "go to the table", success: 0.960, n: 25}
+      - {prompt: "go to the chair (no color)", success: 0.000, n: 15}
+      - {prompt: "go to the person", success: 0.000, n: 25}
+    threshold_m: 0.3
+    texts: {threshold: "0.3 m", color_chair: "0.851", zero: "0.000"}
+    source: "My Exam 2 repo, README Sec. 3.1"
+  red_chair_checks:
+    value: {hits: 180, total: 180}
+    texts: {short: "180 of 180"}
+    source: "My Exam 2 repo, README Sec. 3.1"
+  home_gpu:
+    value: {name: "NVIDIA RTX 4000 Ada", memory_gb: 20}
+    text: "RTX 4000 Ada, 20 GB"
+    source: "My Exam 2 repo, README Sec. 2"
+
+sources:
+  saycan: "Reported by Ahn et al., 2022"
+  rt2: "Reported by Brohan et al., 2023"
+  l2r: "Reported by Yu et al., 2023"
+  clip: "Reported by Radford et al., 2021"
+  homerobot: "Reported by Yenamandra et al., 2023"
+  gorilla: "Reported by Patil et al., 2023"
+  vllm_docs: "vLLM documentation, Structured Outputs"
+  rma: "Reported by Kumar et al., 2021"
+  cladera: "Cladera et al., arXiv 2505.09108, Table 6"
+  tello: "Ryze Tello SDK User Guide and User Manual"
+  mine: "Measured in my project (Exam 2)"
+
+references:
+  - "Ahn et al. 2022 · Liang et al. 2022 · Yu et al. 2023 · Huang et al. 2023 · Brohan et al. 2023 · Patil et al. 2023 · Kwon et al. 2023"
+  - "Radford et al. 2021 · Yenamandra et al. 2023 · Kumar et al. 2021 · Rudin et al. 2021 · Cladera et al. 2025 · Ryze Tello SDK"
+
+beats:
+  "0.1":
+    title: "One Sentence, Two Robots."
+    subtitle: "LLM mission control for a quadruped and a drone from one home PC."
+    footer: "Aidan Martin · ENGR 6010"
+    pc: "Home PC (GPU)"
+    pad: "home pad"
+    typed_label: "mission, typed at the home PC"
+
+  "1.1":
+    kicker: "Act 1 · The problem"
+    title: "Two bodies, one sentence"
+    drone_title: "Drone"
+    dog_title: "Dog"
+    drone_lines:
+      - "Flies and looks ahead with a forward camera"
+      - "Up to {tello_flight_time} per battery"
+      - "Takes text commands over UDP, for example"
+    drone_code: "go x y z speed"
+    dog_lines:
+      - "Walks to a place on the ground"
+      - "Takes velocity targets (vx, vy, wz) over WebRTC"
+      - "Unitree's controller does the walking"
+    chip_drone: "check the atrium"
+    chip_dog: "go to the red chair"
+    chip_both: "come home"
+    receives: "gets from the sentence"
+    source: "Flight time and commands: Ryze Tello SDK User Guide and User Manual · Dog interface: my project (Exam 2)"
+    caption:
+      - "The planner must split one sentence across two very different bodies."
+
+  "1.2":
+    kicker: "Act 1 · The problem"
+    title: "Language stays above the fast loops"
+    axis: "rate"
+    slowed: "pulses slowed for display"
+    llm: "LLM planner: once per mission step"
+    owl: "OWLv2 detection: {owlv2_rate}"
+    nav: "dog navigation policy: {go2_nav_rate}"
+    walk: "walking policy: {go2_walk.policy} (simulation only)"
+    pd: "joint PD loop: {go2_walk.pd} (simulation only)"
+    walk_note: "{go2_walk.io}"
+    tello: "Tello flight controller: onboard, takes commands"
+    tello_note: "no rate shown: none was measured"
+    ref_title: "from the readings"
+    rt2: "RT-2 55B: {rt2_rate.short_55b} on cloud TPUs"
+    rma_base: "RMA on A1: {rma_rates.base} policy"
+    rma_adapt: "RMA on A1: {rma_rates.adapt} adaptation"
+    bracket_lang: "language plans"
+    bracket_move: "learned policies and controllers move the robot"
+    caption:
+      - "Language plans. Policies and controllers move."
+      - "SayCan kept them apart, and even RT-2 ran at {rt2_rate.short_55b}."
+
+  "2.1":
+    kicker: "Act 2 · What the LLM should say"
+    title: "The interface ladder"
+    top: "close to language"
+    bottom: "close to the motors"
+    head_out: "LLM outputs (our example)"
+    head_who: "who turns it into motion"
+    head_num: "reported result"
+    rungs:
+      - name: "Skill name"
+        paper: "SayCan"
+        code: ['scout(area="atrium")']
+        who: "a skill library runs it"
+        result: "plan {saycan_results.palm_plan}, execute {saycan_results.palm_exec} on {saycan_instructions} instructions"
+        source: "Ahn et al., 2022"
+      - name: "Code"
+        paper: "Code as Policies"
+        code: ['pts = detect("red chair")', 'goal = pts[0]', 'dog.go_to(goal)']
+        who: "API functions run it"
+        result: ""
+        source: "Liang et al., 2022"
+      - name: "Reward"
+        paper: "Language to Rewards"
+        code: ['set_goal_distance(target, 0.5)']
+        who: "MuJoCo MPC finds the motion"
+        result: "{l2r_success.l2r} of {l2r_tasks} tasks vs {l2r_success.cap} for a skill-library baseline"
+        source: "Yu et al., 2023"
+      - name: "Value map"
+        paper: "VoxPoser"
+        code: []
+        who: "a motion planner follows it"
+        result: ""
+        source: "Huang et al., 2023"
+      - name: "Action tokens"
+        paper: "RT-2"
+        code: ['132 114 128 5 25 156']
+        who: "the model itself drives"
+        result: "{rt2_unseen_avg.rt2} vs {rt2_unseen_avg.rt1} for RT-1 on unseen settings"
+        source: "Brohan et al., 2023"
+    no_number: "no headline number"
+    highlight: "Our team: typed tool calls, because both robots already have controllers that accept commands."
+    caption:
+      - "Choose the rung your robots already have controllers for."
+
+  "2.2":
+    kicker: "Act 2 · What the LLM should say"
+    title: "Say × Can, for a team"
+    chart_title: "SayCan, reported on {saycan_instructions} instructions"
+    groups: ["PaLM-SayCan", "FLAN-SayCan", "PaLM alone", "FLAN alone", "Behavioral cloning"]
+    plan: "plan"
+    execute: "execute"
+    not_reported: "execute not reported"
+    illus: "Illustration: scores are made up to show the rule"
+    candidates:
+      - "drone: scout atrium"
+      - "dog: walk to atrium and look"
+      - "drone: fly home"
+      - "dog: go to red chair (not yet seen)"
+    heads: ["Say", "Can", "Say × Can"]
+    say_note: "useful?"
+    can_note: "possible now?"
+    battery: "drone battery"
+    reserve: "{reserve}% reserve (my setting)"
+    chosen: "chosen"
+    keys: "drag, or press [ and ]"
+    caption:
+      - "Pick the step that is both useful and possible."
+
+  "3.1":
+    kicker: "Act 3 · From words to things"
+    title: "Tool calls, checked before anything moves"
+    llm: "LLM"
+    calls: "tool calls"
+    checker: "Checker"
+    checker_real: "Checker is real code in this program"
+    robot_plan: "Robot-side system: plan, not yet built"
+    bad: "Calls the checker must refuse"
+    at_battery: "at battery {battery}%"
+    schema_title: "tools.schema.json (excerpt)"
+    json_title: "one call as JSON"
+    gorilla: "Gorilla: fine-tuned {gorilla_base.model} with retrieval to cut hallucinated API calls"
+    vllm: "vLLM Structured Outputs can force output to match a JSON schema"
+    caption:
+      - "The LLM proposes; a checker decides."
+
+  "3.2":
+    kicker: "Act 3 · From words to things"
+    title: "Words to places"
+    space: "shared image-text space"
+    phrases: ["a red chair", "a chair", "a person"]
+    crops: ["red chair", "blue chair", "table", "cylinder"]
+    illus: "Illustration of a shared embedding, not CLIP's actual vectors"
+    clip: "CLIP: {clip_pairs} image-text pairs; zero-shot, {clip_zero_shot}."
+    chart_title: "OWLv2 grounding: floor point within {grounding_eval.threshold}"
+    note_nocolor: "no color word"
+    note_person: "people rendered as cylinders"
+    real: "Real robot: 'red chair' picked the right chair in {red_chair_checks.short} checks"
+    homerobot: "HomeRobot baselines: {homerobot_real} real-world success"
+    caption:
+      - "Open-vocabulary vision ties words to places, but some phrases fail outright."
+
+  "4.1":
+    kicker: "Act 4 · The team"
+    title: "Why a drone helps"
+    card_title: "Cladera et al., 2025"
+    rows:
+      - ["TEAM", "quadcopter + wheeled ground robot"]
+      - ["PLANNER", "LLM via {cladera_llm}; maps shared when robots meet"]
+      - ["SCALE", "{cladera_specs} language missions, up to {cladera_max_distance}"]
+    chart_title: "Triage search success"
+    bars: ["ground robot alone", "air-ground team", "ground robot with the true map"]
+    caption:
+      - "Seen from above, a failed ground search became a mostly successful one."
+      - "Our difference: the LLM runs on the home PC, not through a cloud API."
+
+  "4.2":
+    kicker: "Act 4 · The team"
+    title: "One home point"
+    pc: "Home PC ({home_gpu})"
+    box_llm: "LLM server with structured outputs"
+    box_checker: "tool checker (the logic from 3.1)"
+    box_state: "mission state and map"
+    box_owl: "overhead camera pose + OWLv2"
+    box_nav: "dog navigation policy, {go2_nav_rate}"
+    nav_note: "ran on the MacBook in the real runs"
+    dog_link: "robot's Wi-Fi hotspot, WebRTC, velocity targets"
+    dog_result: "{go2_real_runs.short} real runs reached the target"
+    drone_link: "Tello Wi-Fi, UDP"
+    drone_ports: ["commands {tello_ports.cmd}", "state {tello_ports.state}", "video {tello_ports.video}"]
+    router: "No router: one Wi-Fi interface per robot hotspot"
+    router_verify: "verify on hardware"
+    packets: "packets slowed for display"
+    source: "Home PC GPU: my Exam 2 repo · ports: Ryze Tello SDK User Guide"
+    legend_built: "solid: built and measured"
+    legend_plan: "dashed: plan"
+    caption:
+      - "Everything that thinks stays at home; the robots carry out commands."
+
+  "4.3":
+    kicker: "Act 4 · The team"
+    title: "A mission, step by step"
+    illus: "Illustration: scripted motion, not a run"
+    home: "home"
+    hallway: "hallway"
+    atrium: "atrium"
+    camera_square: "overhead camera coverage (built)"
+    geofence: "geofence (my setting)"
+    found: "found: red chair (drone camera)"
+    dog_tag: "Outside the camera square, the dog would steer by its odometry and the drone's sighting"
+    log: "mission log"
+    rejected: "rejected in 3.1"
+    battery: "drone battery, {tello_flight_time} scale"
+    reserve: "{reserve}% reserve (my setting)"
+    clock: "mission time"
+    compressed: "time compressed"
+    source: "Battery scale: Tello User Manual ({tello_flight_time}) · map, reserve, and geofence: my settings"
+    phase_captions:
+      - "One sentence becomes six typed calls."
+      - "The drone looks first."
+      - "Seen from above: the red chair."
+      - "The drone looks; the dog goes."
+      - "Near its reserve, the drone heads home."
+      - "The dog reaches the chair, then turns for home."
+      - "Both robots home; every executed call passed the checker."
+
+  "5.1":
+    kicker: "Act 5 · Close"
+    title: "Three things to keep"
+    takeaways:
+      - "Keep the LLM above the fast loops: it chooses steps, and policies and controllers move the robots."
+      - "Make it speak in typed tool calls, and check every call against real limits before a robot moves."
+      - "Ground words with open-vocabulary vision, and measure which phrases fail."
+    built_head: "Built and measured"
+    built: "The Go2 X walks to an object named in plain language, from an overhead camera: {go2_real_runs.short} real runs."
+    next_head: "Next"
+    next: "Tello link, LLM tool server on the home PC, the two-robot mission, and the learned-dynamics safety filter under the dog's commands."

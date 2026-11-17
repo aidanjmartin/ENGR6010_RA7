@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Team tool calls",
+  "description": "Every tool the planner may call, by robot. A call is {\"tool\": \"<robot>.<name>\", \"args\": {...}}. Ranges such as the Tello limits are checked by team/checker.py, not here, so the reason can name the limit.",
+  "robots": ["drone", "dog", "vision"],
+  "tools": {
+    "drone.takeoff": {"type": "object", "properties": {}, "additionalProperties": false},
+    "drone.land": {"type": "object", "properties": {}, "additionalProperties": false},
+    "drone.scout": {
+      "type": "object",
+      "properties": {"area": {"type": "string", "enum": ["atrium", "hallway"]}},
+      "required": ["area"],
+      "additionalProperties": false
+    },
+    "drone.go": {
+      "type": "object",
+      "properties": {
+        "x": {"type": "integer"},
+        "y": {"type": "integer"},
+        "z": {"type": "integer"},
+        "speed": {"type": "integer"}
+      },
+      "required": ["x", "y", "z", "speed"],
+      "additionalProperties": false
+    },
+    "drone.return_home": {"type": "object", "properties": {}, "additionalProperties": false},
+    "dog.go_to": {
+      "type": "object",
+      "properties": {"target": {"type": "string", "minLength": 1}},
+      "required": ["target"],
+      "additionalProperties": false
+    },
+    "dog.stop": {"type": "object", "properties": {}, "additionalProperties": false},
+    "dog.return_home": {"type": "object", "properties": {}, "additionalProperties": false},
+    "vision.find": {
+      "type": "object",
+      "properties": {
+        "phrase": {"type": "string", "minLength": 1},
+        "camera": {"type": "string", "enum": ["drone", "overhead"]}
+      },
+      "required": ["phrase", "camera"],
+      "additionalProperties": false
+    }
+  }
+}

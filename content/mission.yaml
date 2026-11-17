@@ -1,0 +1,58 @@
+# The canned mission: the sentence, the tool calls an LLM would return, the calls
+# the checker must refuse, and the top-down map used in beat 4.3.
+# No LLM runs in this program. Everything here is typed by hand.
+
+sentence: "Check the atrium for the red chair. If it is there, send the dog to it. Then both come home."
+
+# Design parameters (my settings, not values from any paper).
+reserve_pct: 30
+geofence:          # metres, map frame (x right, y up)
+  - [0.0, 0.0]
+  - [8.0, 0.0]
+  - [8.0, 2.0]
+  - [18.0, 2.0]
+  - [18.0, 0.0]
+  - [32.0, 0.0]
+  - [32.0, 18.0]
+  - [18.0, 18.0]
+  - [18.0, 6.5]
+  - [8.0, 6.5]
+  - [8.0, 7.5]
+  - [0.0, 7.5]
+
+# The canned tool calls, in the order the planner would issue them.
+calls:
+  - {tool: drone.takeoff, args: {}}
+  - {tool: drone.scout, args: {area: atrium}}
+  - {tool: vision.find, args: {phrase: red chair, camera: drone}}
+  - {tool: dog.go_to, args: {target: red chair}}
+  - {tool: drone.return_home, args: {}}
+  - {tool: dog.return_home, args: {}}
+
+# Calls the checker must refuse (shown in beat 3.1). `state` overrides the
+# world state the call is checked in.
+bad_calls:
+  - {tool: dog.fly, args: {z: 2.0}}
+  - {tool: drone.go, args: {x: 800, y: 0, z: 100, speed: 50}}
+  - {tool: drone.scout, args: {area: atrium}, state: {battery: 25}}
+
+map:
+  size: [32.0, 18.0]
+  rooms:
+    home: [0.0, 0.0, 8.0, 7.5]
+    hallway: [8.0, 2.0, 18.0, 6.5]
+    atrium: [18.0, 0.0, 32.0, 18.0]
+  areas:                     # named places a tool call can refer to
+    atrium: [25.0, 9.0]
+    hallway: [13.0, 4.25]
+    home: [3.5, 3.5]
+  home_pad: [1.5, 1.5, 5.5, 5.5]
+  spots:                     # where each robot sits on the pad
+    drone: [2.6, 3.5]
+    dog: [4.4, 3.5]
+  camera_square: [19.5, 1.5, 26.5, 8.5]      # overhead camera coverage (built)
+  objects:
+    - {name: blue chair, kind: chair, pos: [22.0, 4.0], color: [80, 120, 220], heading: 0.4}
+    - {name: gray chair, kind: chair, pos: [24.5, 6.6], color: [150, 156, 170], heading: -0.3}
+    - {name: red chair, kind: chair, pos: [29.6, 14.4], color: [222, 64, 64], heading: 0.9}
+    - {name: table, kind: table, pos: [24.0, 13.0], size: [3.2, 1.8]}
